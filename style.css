@@ -347,6 +347,82 @@ footer a:hover {
     to { opacity: 1; }
 }
 
+/* Combo display styles */
+#combo-display {
+    min-height: 2em;
+    font-size: 1.25em;
+    font-weight: 700;
+    color: #00adef;
+    margin-bottom: 0.2em;
+    letter-spacing: 0.01em;
+    transition: color 0.2s, transform 0.2s;
+    text-shadow: 0 2px 8px #e3f6fd, 0 1px 0 #fffbe6;
+    height: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.combo-animate {
+    color: #ffd600 !important;
+    animation: combo-pop 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+}
+@keyframes combo-pop {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.25) rotate(-3deg); }
+    70% { transform: scale(1.1) rotate(2deg); }
+    100% { transform: scale(1); }
+}
+
+/* Golden drop styles */
+.golden-drop {
+    background: radial-gradient(ellipse at 60% 30%, #fffbe6 30%, #ffd600 90%);
+    border: 2.5px solid #ffe066;
+    box-shadow: 0 2px 16px 2px #ffd60099, 0 2px 8px #ffd60044;
+    animation: golden-glow 1.2s infinite alternate;
+}
+@keyframes golden-glow {
+    0% { filter: brightness(1.1) drop-shadow(0 0 0 #ffd600); }
+    100% { filter: brightness(1.4) drop-shadow(0 0 12px #ffd600); }
+}
+
+/* Splash particles styles */
+.splash-particle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.7;
+    z-index: 10;
+    animation: splash-particle-anim 0.5s linear forwards;
+}
+@keyframes splash-particle-anim {
+    0% { opacity: 1; transform: scale(1) translateY(0); }
+    100% { opacity: 0; transform: scale(1.5) translateY(-30px); }
+}
+
+/* Bucket shake animation */
+.bucket-shake {
+    animation: bucket-shake-anim 0.4s cubic-bezier(.36,.07,.19,.97) 1;
+}
+@keyframes bucket-shake-anim {
+    10%, 90% { transform: translateX(-2px); }
+    20%, 80% { transform: translateX(4px); }
+    30%, 50%, 70% { transform: translateX(-8px); }
+    40%, 60% { transform: translateX(8px); }
+    100% { transform: translateX(0); }
+}
+
+/* Feedback animation */
+.feedback-animate {
+    animation: feedback-pop 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+}
+@keyframes feedback-pop {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.25); }
+    100% { transform: scale(1); }
+}
+
 /* Responsive for mobile */
 @media (max-width: 600px) {
     body {
