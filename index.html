@@ -11,28 +11,30 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <img src="https://www.charitywater.org/images/logos/cw-logo-yellow.svg" alt="Charity: water logo" class="logo">
-        <h1>Water Drop Collector</h1>
-        <p class="mission">Help collect clean water drops and avoid pollutants! Every drop counts.</p>
-    </header>
-    <div class="game-info">
-        <span id="score">Score: 0</span>
-        <span id="timer">Time: 30</span>
+    <div class="main-container">
+        <header>
+            <img src="https://www.charitywater.org/images/logos/cw-logo-yellow.svg" alt="Charity: water logo" class="logo">
+            <h1>Water Drop Collector</h1>
+            <p class="mission">Help collect clean water drops and avoid pollutants! Every drop counts.</p>
+        </header>
+        <div class="game-info">
+            <span id="score">Score: 0</span>
+            <span id="timer">Time: 30</span>
+        </div>
+        <div class="difficulty-select">
+            <label for="difficulty">Difficulty:</label>
+            <select id="difficulty">
+                <option value="easy">Easy</option>
+                <option value="normal" selected>Normal</option>
+                <option value="hard">Hard</option>
+            </select>
+        </div>
+        <div id="game-area">
+            <div id="bucket"></div>
+        </div>
+        <div id="feedback"></div>
+        <button id="start-btn">Start Game</button>
     </div>
-    <div class="difficulty-select">
-        <label for="difficulty">Difficulty:</label>
-        <select id="difficulty">
-            <option value="easy">Easy</option>
-            <option value="normal" selected>Normal</option>
-            <option value="hard">Hard</option>
-        </select>
-    </div>
-    <div id="game-area">
-        <div id="bucket"></div>
-    </div>
-    <div id="feedback"></div>
-    <button id="start-btn">Start Game</button>
     <footer>
         <p>Learn more at <a href="https://charitywater.org" target="_blank">charitywater.org</a> |
         <a href="https://www.charitywater.org/donate" target="_blank">Donate</a></p>

@@ -1,28 +1,58 @@
 body {
     font-family: 'Montserrat', Arial, sans-serif;
-    background: #f7fafc;
+    background: linear-gradient(135deg, #e3f6fd 0%, #fffbe6 100%);
     color: #222;
     margin: 0;
     padding: 0;
     text-align: center;
+    min-height: 100vh;
+}
+
+.main-container {
+    background: #fff;
+    max-width: 420px;
+    margin: 2.5em auto 2em auto;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0,173,239,0.10), 0 1.5px 8px rgba(255,214,0,0.08);
+    padding: 2.2em 1.5em 1.5em 1.5em;
+    border: 1.5px solid #e3f6fd;
+    position: relative;
 }
 
 header {
-    background: #ffd600;
-    padding: 1em 0 0.5em 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    background: none;
+    padding: 0 0 1.2em 0;
+    border-bottom: 2px solid #ffd600;
+    border-radius: 0 0 16px 16px;
+    box-shadow: none;
+    margin-bottom: 1.2em;
 }
 
 .logo {
-    height: 48px;
+    height: 54px;
     margin-bottom: 0.5em;
+    margin-top: -1em;
+}
+
+h1 {
+    font-size: 2.1em;
+    font-weight: 700;
+    margin: 0.2em 0 0.1em 0;
+    letter-spacing: 0.01em;
+    color: #00adef;
+    text-shadow: 0 2px 8px #e3f6fd;
 }
 
 .mission {
     color: #222;
     margin: 0.5em 0 1em 0;
-    font-size: 1.1em;
+    font-size: 1.13em;
     font-weight: 500;
+    background: #fffbe6;
+    border-radius: 8px;
+    padding: 0.5em 0.7em;
+    display: inline-block;
+    box-shadow: 0 1px 4px rgba(255,214,0,0.07);
 }
 
 .game-info {
@@ -30,39 +60,53 @@ header {
     justify-content: center;
     gap: 2em;
     font-size: 1.2em;
-    margin: 1em 0;
+    margin: 1em 0 0.7em 0;
+    font-weight: 600;
+    color: #00adef;
 }
 
 .difficulty-select {
-    margin-bottom: 0.5em;
+    margin-bottom: 0.7em;
     font-size: 1.1em;
     font-family: 'Montserrat', Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
 }
 .difficulty-select label {
     font-weight: 600;
-    margin-right: 0.5em;
+    margin-right: 0.2em;
+    color: #bfa600;
 }
 #difficulty {
     font-family: 'Montserrat', Arial, sans-serif;
     font-size: 1em;
-    border-radius: 6px;
-    border: 1px solid #ffd600;
-    padding: 0.2em 0.8em;
+    border-radius: 8px;
+    border: 1.5px solid #ffd600;
+    padding: 0.3em 1.1em;
     background: #fffbe6;
     color: #222;
     margin-left: 0.2em;
+    box-shadow: 0 1px 4px rgba(255,214,0,0.07);
+    transition: border 0.2s, box-shadow 0.2s;
+}
+#difficulty:focus {
+    outline: none;
+    border: 1.5px solid #00adef;
+    box-shadow: 0 0 0 2px #b3e6fc;
 }
 
 #game-area {
     position: relative;
     margin: 0 auto;
-    background: #e3f6fd;
+    background: linear-gradient(180deg, #e3f6fd 60%, #fffbe6 100%);
     border: 3px solid #ffd600;
     border-radius: 16px;
     width: 320px;
     height: 480px;
     overflow: hidden;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 24px rgba(0,173,239,0.13), 0 1.5px 8px rgba(255,214,0,0.08);
 }
 
 /* Water droplet with gradient and shine */
@@ -168,7 +212,7 @@ header {
     background: linear-gradient(to top, #ffd600 80%, #fffbe6 100%);
     border: 3px solid #bfa600;
     border-radius: 0 0 40px 40px / 0 0 60px 60px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+    box-shadow: 0 4px 16px rgba(255,214,0,0.13), 0 1.5px 8px rgba(0,173,239,0.08);
     z-index: 3;
     transition: left 0.1s;
     display: flex;
@@ -191,53 +235,61 @@ header {
 #feedback {
     min-height: 2em;
     font-size: 1.2em;
-    margin: 1em 0;
+    margin: 1.2em 0 0.7em 0;
     color: #ffd600;
     font-weight: bold;
     text-shadow: 1px 1px 2px #222;
+    letter-spacing: 0.01em;
 }
 
 #start-btn {
-    background: #ffd600;
+    background: linear-gradient(90deg, #ffd600 80%, #ffe066 100%);
     color: #222;
     border: none;
-    border-radius: 8px;
-    padding: 0.8em 2em;
-    font-size: 1.1em;
+    border-radius: 10px;
+    padding: 0.9em 2.2em;
+    font-size: 1.13em;
     font-weight: bold;
-    margin: 1em 0;
+    margin: 1.2em 0 0.5em 0;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
     font-family: 'Montserrat', Arial, sans-serif;
+    box-shadow: 0 2px 8px rgba(255,214,0,0.10);
 }
-
-#start-btn:hover {
-    background: #ffe066;
+#start-btn:hover, #start-btn:focus {
+    background: linear-gradient(90deg, #ffe066 80%, #ffd600 100%);
+    box-shadow: 0 4px 16px rgba(0,173,239,0.13);
+    outline: none;
+    transform: translateY(-2px) scale(1.03);
 }
 
 footer {
-    margin-top: 2em;
-    font-size: 1em;
+    margin-top: 2.5em;
+    font-size: 1.05em;
     color: #888;
     background: #fffbe6;
     border-top: 2px solid #ffd600;
-    padding: 1.2em 0 0.7em 0;
+    padding: 1.5em 0 1em 0;
     font-family: 'Montserrat', Arial, sans-serif;
+    box-shadow: 0 -2px 12px rgba(0,173,239,0.04);
 }
 footer a {
     color: #00adef;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.2s;
+    border-bottom: 1.5px dotted #00adef;
 }
 footer a:hover {
     color: #ffd600;
+    border-bottom: 1.5px solid #ffd600;
 }
 .footer-mission {
-    font-size: 1.05em;
-    margin-top: 0.5em;
+    font-size: 1.08em;
+    margin-top: 0.7em;
     color: #222;
     font-weight: 500;
+    letter-spacing: 0.01em;
 }
 
 /* Responsive for mobile */
@@ -245,6 +297,10 @@ footer a:hover {
     body {
         font-size: 1em;
         padding: 0 0.2em;
+    }
+    .main-container {
+        max-width: 99vw;
+        padding: 1.2em 0.2em 1em 0.2em;
     }
     .game-info {
         flex-direction: column;
