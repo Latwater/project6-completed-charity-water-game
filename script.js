@@ -6,6 +6,7 @@ const timerDisplay = document.getElementById('timer');
 const feedback = document.getElementById('feedback');
 const startBtn = document.getElementById('start-btn');
 const bucket = document.getElementById('bucket');
+const difficultySelect = document.getElementById('difficulty');
 
 let score = 0;
 let timeLeft = 30;
@@ -16,6 +17,40 @@ let bucketX = 120; // initial position (centered)
 const bucketWidth = 80;
 const bucketHeight = 40;
 let highScore = localStorage.getItem('cw_highscore') ? parseInt(localStorage.getItem('cw_highscore')) : 0;
+let dropGenSpeed = 700;
+let dropSpeedMod = 1;
+let gameDuration = 30;
+
+const missionMessages = [
+    "Every drop you catch helps bring clean water to communities in need.",
+    "Charity: water has funded 111,000+ water projects worldwide!",
+    "1 in 10 people lack access to clean water. You can help.",
+    "Your actions make a difference. Thank you for playing!"
+];
+
+function setDifficulty() {
+    const diff = difficultySelect.value;
+    if (diff === 'easy') {
+        dropGenSpeed = 950;
+        dropSpeedMod = 0.8;
+        gameDuration = 40;
+    } else if (diff === 'normal') {
+        dropGenSpeed = 700;
+        dropSpeedMod = 1;
+        gameDuration = 30;
+    } else if (diff === 'hard') {
+        dropGenSpeed = 480;
+        dropSpeedMod = 1.25;
+        gameDuration = 22;
+    }
+}
+
+difficultySelect.addEventListener('change', () => {
+    if (!gameActive) {
+        setDifficulty();
+        timerDisplay.textContent = 'Time: ' + gameDuration;
+    }
+});
 
 function setBucketPosition(x) {
     // Clamp bucket within game area
@@ -52,12 +87,30 @@ function createDrop() {
     drop.style.top = '-48px';
     drop.dataset.type = isWater ? 'water' : 'pollutant';
 
+    // Click to collect or remove drop
+    drop.addEventListener('click', function(e) {
+        if (!gameActive) return;
+        if (drop.classList.contains('splash')) return;
+        if (drop.dataset.type === 'water') {
+            score++;
+            showFeedback('Bonus! +1', true);
+            drop.classList.add('splash');
+        } else {
+            score = Math.max(0, score - 2);
+            showFeedback('Pollutant! -2', false);
+            drop.classList.add('splash');
+        }
+        updateScore();
+        setTimeout(() => drop.remove(), 300);
+    });
+
     gameArea.appendChild(drop);
 
     // Animate drop falling
     let y = -48;
     // Slower speeds: reduce by about 30%
-    const speed = isWater ? 1.7 + Math.random() * 0.7 : 1.3 + Math.random() * 0.7; // px per frame, slight random
+    const baseSpeed = isWater ? 1.7 + Math.random() * 0.7 : 1.3 + Math.random() * 0.7; // px per frame, slight random
+    const speed = baseSpeed * dropSpeedMod;
     const dropX = parseInt(drop.style.left);
 
     function fall() {
@@ -83,12 +136,14 @@ function createDrop() {
                 if (drop.dataset.type === 'water') {
                     score++;
                     showFeedback('Great! +1', true);
+                    drop.classList.add('splash');
                 } else {
                     score = Math.max(0, score - 2);
                     showFeedback('Pollutant! -2', false);
+                    drop.classList.add('splash');
                 }
                 updateScore();
-                drop.remove();
+                setTimeout(() => drop.remove(), 300);
                 return;
             }
         }
@@ -126,8 +181,9 @@ function showFeedback(msg, positive) {
 }
 
 function startGame() {
+    setDifficulty();
     score = 0;
-    timeLeft = 30;
+    timeLeft = gameDuration;
     updateScore();
     updateTimer();
     feedback.textContent = '';
@@ -136,9 +192,10 @@ function startGame() {
     setBucketPosition((gameArea.clientWidth - bucketWidth) / 2);
     gameActive = true;
     startBtn.disabled = true;
+    difficultySelect.disabled = true;
 
     // Drop generator
-    dropInterval = setInterval(createDrop, 700);
+    dropInterval = setInterval(createDrop, dropGenSpeed);
 
     // Timer
     gameInterval = setInterval(() => {
@@ -160,16 +217,18 @@ function endGame() {
         localStorage.setItem('cw_highscore', highScore);
         newHigh = true;
     }
-    feedback.textContent = `Game Over! Final Score: ${score}` + 
-        (newHigh ? " 🎉 New High Score!" : ` | High Score: ${highScore}`);
+    // Show a random mission/impact message
+    const missionMsg = missionMessages[Math.floor(Math.random() * missionMessages.length)];
+    feedback.innerHTML = `Game Over! Final Score: ${score}` + 
+        (newHigh ? " 🎉 New High Score!<br>" : ` | High Score: ${highScore}<br>`) +
+        `<span style='display:block;font-size:1em;color:#00adef;margin-top:0.5em;'>${missionMsg}</span>`;
     startBtn.disabled = false;
+    difficultySelect.disabled = false;
 }
 
 startBtn.addEventListener('click', () => {
     if (!gameActive) startGame();
 });
 
-// Move bucket with mouse inside game area
 gameArea.addEventListener('mousemove', handleMouseMove);
-// Move bucket with arrow keys
 window.addEventListener('keydown', handleKeyDown);

@@ -10,6 +10,7 @@ body {
 header {
     background: #ffd600;
     padding: 1em 0 0.5em 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 
 .logo {
@@ -20,6 +21,8 @@ header {
 .mission {
     color: #222;
     margin: 0.5em 0 1em 0;
+    font-size: 1.1em;
+    font-weight: 500;
 }
 
 .game-info {
@@ -28,6 +31,26 @@ header {
     gap: 2em;
     font-size: 1.2em;
     margin: 1em 0;
+}
+
+.difficulty-select {
+    margin-bottom: 0.5em;
+    font-size: 1.1em;
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+.difficulty-select label {
+    font-weight: 600;
+    margin-right: 0.5em;
+}
+#difficulty {
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-size: 1em;
+    border-radius: 6px;
+    border: 1px solid #ffd600;
+    padding: 0.2em 0.8em;
+    background: #fffbe6;
+    color: #222;
+    margin-left: 0.2em;
 }
 
 #game-area {
@@ -58,6 +81,14 @@ header {
     animation: drop-bounce 0.7s infinite alternate;
     /* Add a subtle shine */
     overflow: visible;
+}
+.water-drop.splash {
+    animation: splash-water 0.3s linear forwards;
+    pointer-events: none;
+}
+@keyframes splash-water {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.5) rotate(20deg); }
 }
 .water-drop::after {
     content: '';
@@ -99,6 +130,14 @@ header {
     transition: transform 0.1s;
     z-index: 2;
     animation: drop-bounce 0.7s infinite alternate-reverse;
+}
+.pollutant-drop.splash {
+    animation: splash-pollutant 0.3s linear forwards;
+    pointer-events: none;
+}
+@keyframes splash-pollutant {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.5) rotate(-20deg); }
 }
 .pollutant-drop::after {
     content: '';
@@ -169,6 +208,7 @@ header {
     margin: 1em 0;
     cursor: pointer;
     transition: background 0.2s;
+    font-family: 'Montserrat', Arial, sans-serif;
 }
 
 #start-btn:hover {
@@ -179,10 +219,70 @@ footer {
     margin-top: 2em;
     font-size: 1em;
     color: #888;
+    background: #fffbe6;
+    border-top: 2px solid #ffd600;
+    padding: 1.2em 0 0.7em 0;
+    font-family: 'Montserrat', Arial, sans-serif;
 }
-
 footer a {
     color: #00adef;
     text-decoration: none;
     font-weight: bold;
+    transition: color 0.2s;
+}
+footer a:hover {
+    color: #ffd600;
+}
+.footer-mission {
+    font-size: 1.05em;
+    margin-top: 0.5em;
+    color: #222;
+    font-weight: 500;
+}
+
+/* Responsive for mobile */
+@media (max-width: 600px) {
+    body {
+        font-size: 1em;
+        padding: 0 0.2em;
+    }
+    .game-info {
+        flex-direction: column;
+        gap: 0.5em;
+        font-size: 1.05em;
+    }
+    .difficulty-select {
+        font-size: 1em;
+        margin-bottom: 0.7em;
+    }
+    #start-btn {
+        width: 90vw;
+        max-width: 320px;
+        font-size: 1em;
+        padding: 0.7em 0;
+    }
+    #feedback {
+        font-size: 1em;
+    }
+    footer {
+        font-size: 0.98em;
+        padding: 1em 0 0.5em 0;
+    }
+}
+@media (max-width: 400px) {
+    #game-area {
+        width: 98vw;
+        height: 60vw;
+        min-width: 220px;
+        min-height: 320px;
+        max-width: 320px;
+        max-height: 480px;
+    }
+    .game-info {
+        flex-direction: column;
+        gap: 0.5em;
+    }
+    #start-btn {
+        font-size: 0.95em;
+    }
 }
