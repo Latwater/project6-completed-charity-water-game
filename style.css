@@ -1,0 +1,188 @@
+body {
+    font-family: 'Montserrat', Arial, sans-serif;
+    background: #f7fafc;
+    color: #222;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+header {
+    background: #ffd600;
+    padding: 1em 0 0.5em 0;
+}
+
+.logo {
+    height: 48px;
+    margin-bottom: 0.5em;
+}
+
+.mission {
+    color: #222;
+    margin: 0.5em 0 1em 0;
+}
+
+.game-info {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    font-size: 1.2em;
+    margin: 1em 0;
+}
+
+#game-area {
+    position: relative;
+    margin: 0 auto;
+    background: #e3f6fd;
+    border: 3px solid #ffd600;
+    border-radius: 16px;
+    width: 320px;
+    height: 480px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+/* Water droplet with gradient and shine */
+.water-drop {
+    background: radial-gradient(ellipse at 60% 30%, #b3e6fc 30%, #00adef 90%);
+    border-radius: 50% 50% 60% 60% / 60% 60% 100% 100%;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(0,173,239,0.2);
+    position: absolute;
+    width: 36px;
+    height: 48px;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.1s;
+    z-index: 2;
+    animation: drop-bounce 0.7s infinite alternate;
+    /* Add a subtle shine */
+    overflow: visible;
+}
+.water-drop::after {
+    content: '';
+    position: absolute;
+    left: 11px;
+    top: 8px;
+    width: 8px;
+    height: 16px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.1) 100%);
+    border-radius: 50%;
+    transform: rotate(-20deg);
+    pointer-events: none;
+    opacity: 0.8;
+}
+.water-drop::before {
+    content: '';
+    position: absolute;
+    left: 16px;
+    top: 38px;
+    width: 4px;
+    height: 12px;
+    background: linear-gradient(to bottom, #00adef 60%, rgba(0,173,239,0.0) 100%);
+    border-radius: 50%;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Pollutant droplet with gradient and "dirty" look */
+.pollutant-drop {
+    background: radial-gradient(ellipse at 60% 30%, #ccc 20%, #888 80%);
+    border-radius: 50% 50% 60% 60% / 60% 60% 100% 100%;
+    border: 2px solid #333;
+    box-shadow: 0 2px 8px rgba(80,80,80,0.2);
+    position: absolute;
+    width: 36px;
+    height: 48px;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.1s;
+    z-index: 2;
+    animation: drop-bounce 0.7s infinite alternate-reverse;
+}
+.pollutant-drop::after {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    width: 6px;
+    height: 10px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* Drop bounce animation for dynamic effect */
+@keyframes drop-bounce {
+    0% { transform: translateY(0) scale(1); }
+    100% { transform: translateY(4px) scale(1.05); }
+}
+
+/* Bucket styles */
+#bucket {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 40px;
+    background: linear-gradient(to top, #ffd600 80%, #fffbe6 100%);
+    border: 3px solid #bfa600;
+    border-radius: 0 0 40px 40px / 0 0 60px 60px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+    z-index: 3;
+    transition: left 0.1s;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+#bucket::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 10px;
+    width: 60px;
+    height: 12px;
+    background: #fffbe6;
+    border-radius: 50%;
+    opacity: 0.7;
+    z-index: 4;
+}
+
+#feedback {
+    min-height: 2em;
+    font-size: 1.2em;
+    margin: 1em 0;
+    color: #ffd600;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #222;
+}
+
+#start-btn {
+    background: #ffd600;
+    color: #222;
+    border: none;
+    border-radius: 8px;
+    padding: 0.8em 2em;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin: 1em 0;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#start-btn:hover {
+    background: #ffe066;
+}
+
+footer {
+    margin-top: 2em;
+    font-size: 1em;
+    color: #888;
+}
+
+footer a {
+    color: #00adef;
+    text-decoration: none;
+    font-weight: bold;
+}
