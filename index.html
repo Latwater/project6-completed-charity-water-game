@@ -13,8 +13,7 @@
 <body>
     <div class="main-container">
         <header>
-            <img src="https://www.charitywater.org/images/logos/cw-logo-yellow.svg" alt="Charity: water logo" class="logo">
-            <h1>Water Drop Collector</h1>
+            <h1 class="cw-title">💧 Water Drop Collector <span class="cw-animated">by charity: water</span></h1>
             <p class="mission">Help collect clean water drops and avoid pollutants! Every drop counts.</p>
         </header>
         <div class="game-info">
@@ -33,7 +32,9 @@
             <div id="bucket"></div>
         </div>
         <div id="feedback"></div>
+        <button id="sound-btn" aria-label="Toggle sound" title="Toggle sound">🔊</button>
         <button id="start-btn">Start Game</button>
+        <audio id="bg-music" src="https://cdn.pixabay.com/audio/2022/10/16/audio_12b5fae5b2.mp3" loop preload="auto"></audio>
     </div>
     <footer>
         <p>Learn more at <a href="https://charitywater.org" target="_blank">charitywater.org</a> |

@@ -7,6 +7,8 @@ const feedback = document.getElementById('feedback');
 const startBtn = document.getElementById('start-btn');
 const bucket = document.getElementById('bucket');
 const difficultySelect = document.getElementById('difficulty');
+const bgMusic = document.getElementById('bg-music');
+const soundBtn = document.getElementById('sound-btn');
 
 let score = 0;
 let timeLeft = 30;
@@ -20,6 +22,7 @@ let highScore = localStorage.getItem('cw_highscore') ? parseInt(localStorage.get
 let dropGenSpeed = 700;
 let dropSpeedMod = 1;
 let gameDuration = 30;
+let musicMuted = false;
 
 const missionMessages = [
     "Every drop you catch helps bring clean water to communities in need.",
@@ -194,6 +197,14 @@ function startGame() {
     startBtn.disabled = true;
     difficultySelect.disabled = true;
 
+    // Play background music
+    if (bgMusic) {
+        bgMusic.currentTime = 0;
+        bgMusic.volume = 0.45;
+        bgMusic.muted = musicMuted;
+        bgMusic.play();
+    }
+
     // Drop generator
     dropInterval = setInterval(createDrop, dropGenSpeed);
 
@@ -224,6 +235,22 @@ function endGame() {
         `<span style='display:block;font-size:1em;color:#00adef;margin-top:0.5em;'>${missionMsg}</span>`;
     startBtn.disabled = false;
     difficultySelect.disabled = false;
+
+    // Pause and rewind music
+    if (bgMusic) {
+        bgMusic.pause();
+        bgMusic.currentTime = 0;
+    }
+}
+
+if (soundBtn) {
+    soundBtn.addEventListener('click', () => {
+        musicMuted = !musicMuted;
+        if (bgMusic) {
+            bgMusic.muted = musicMuted;
+        }
+        soundBtn.textContent = musicMuted ? '🔇' : '🔊';
+    });
 }
 
 startBtn.addEventListener('click', () => {
